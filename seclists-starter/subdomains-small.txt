@@ -1,0 +1,13 @@
+admin
+administrator
+login
+wp-login.php
+wp-admin
+robots.txt
+sitemap.xml
+backup
+config.php
+uploads
+.git
+.git/config
+.env
