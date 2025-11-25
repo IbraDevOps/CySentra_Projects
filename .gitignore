@@ -1,2 +1,7 @@
-# Private clients VAPT Reports(not pushed to Github)
-Private_Vapt
+# Private client work (never push)
+Private_VAPT/
+
+# Big wordlists or tools
+seclists/
+seclists-starter/
+
