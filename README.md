@@ -1,62 +1,52 @@
-# CySentra_Projects
-This repository contains templates and documentation to run an authorized Vulnerability Assessment &amp; Penetration Test (VAPT) engagement and to publish the results as part of CySentra's research and service portfolio.
+# CySentra Cybersecurity – Research & Engineering Portfolio
 
-**Important:** Only perform VAPT on targets you own or have explicit written permission to test. Never scan or exploit third-party sites without authorization.
+CySentra is a cybersecurity initiative focused on:
+-  Threat Detection & SOC Engineering (Blue Team)
+-  Web & API Security Research (Red Team)
+-  ICS / OT Security & Network Monitoring
+-  AI in Cybersecurity i.e RAG, LLM-assisted audits
+-  Data Protection & Policy Analysis (GDPR, Kenya DPA, CBK, RURA)
 
-## 1. Engagement Overview
-- **Target(s):** abraa.co.ke (example/test target)
-- **Scope:** Web application (public pages, forms, authentication), optional subdomains, and (only if authorized) API endpoints.
-- **Objective:** Identify security issues, assess risk to operations, and provide prioritized remediation guidance.
-- **Deliverables:** Executive summary, technical findings (with evidence), remediation roadmap, retest verification.
+This repository hosts our **public research & labs**.
+⚠️ **Client-specific VAPT reports are stored in PRIVATE repositories**  
+and are never published here.
 
-## 2. Rules of Engagement (Template)
-- **Authorization:** Written permission from the owner must be obtained and stored.
-- **Testing Window:** YYYY-MM-DD to YYYY-MM-DD (agreed hours).
-- **Allowed IPs / Agents:** List of tester IPs and tooling; no out-of-scope scanning.
-- **Out-of-Scope:** Destructive testing on production systems (unless explicitly agreed), social engineering, physical access attempts.
-- **Data Handling:** Any sensitive data discovered must be handled per agreement; anonymize before publishing.
+BlueTeam_Labs/ → Wazuh, Splunk, SIEM playbooks
+RedTeam_Tools/ → Recon / enum scripts that are  non-destructive
+ICS_OT_Security/ → SCADA/PLC network monitoring labs
+Malware_Analysis/ → ELF analyzer in C, sandboxing, static/dynamic
+Policy_Law/ → GDPR vs Kenya DPA, Malabo Convention, CBK guidelines
+Research_Papers/ → RAG privacy law search
 
-## 3. High-level Methodology
-1. **Reconnaissance:** Passive recon, asset discovery, map public endpoints.
-2. **Discovery & Scanning:** Non-intrusive scans for common vulnerabilities (OWASP Top 10 areas).
-3. **Manual Verification:** Confirm findings manually to reduce false positives.
-4. **Risk Analysis:** Classify findings by impact & likelihood.
-5. **Reporting & Remediation:** Deliver clear remediation steps and risk-based prioritization.
-6. **Retest:** Verify fixes.
 
-## 4. Recommended Tools (non-exhaustive)
-- Reconnaissance: whois, dig, Sublist3r, amass
-- Scanning: nmap (safe usage), nikto, wpscan (if WordPress)
-- Web testing: Burp Suite (community or pro), OWASP ZAP
-- Fuzzing/automation: ffuf, gobuster
-- Analysis: sqlmap (use cautiously, only with permission)
-- Logging & evidence: screenshots, HTTP request/response captures, pcap files (if applicable)
+## 🔒 Client VAPT Policy
 
-> Note: Use the tools in a safe, non-destructive configuration. This template avoids providing exploit payloads or instructions for exploitation.
+CySentra follows strict confidentiality:
+- All **client VAPT engagements** are stored in **PRIVATE repositories**.
+- Only **authorized individuals** may request access for review.
+- No exploit payloads or intrusive scripts are ever published publicly.
 
-## 5. Deliverables Structure
-- `report/` : final PDF and markdown report
-- `evidence/` : screenshots and capture files (redacted/anonymized)
-- `scans/` : raw scanner outputs (kept private)
-- `notes/` : pentest notes and commands (private)
-
-## 6. Finding Template (for each issue)
-- **Title:** Short descriptive title
-- **Identifier:** Unique ID (e.g., CY-VAPT-2025-001)
-- **Severity:** Critical / High / Medium / Low
-- **Affected Component:** URL / endpoint / subsystem
-- **Description:** What was found (concise)
-- **Impact:** Business / technical impact
-- **Evidence:** Screenshot filenames, sanitized request/response (no exploit payloads)
-- **Root Cause:** Likely root cause (e.g., missing input validation)
-- **Remediation:** Clear steps to fix (e.g., input validation, patch, config change)
-- **References:** OWASP, vendor KB, CVE if applicable
-- **Remediation Verification:** How to verify fix
-
-## 7. Example Executive Summary (to use in report)
-_CySentra performed an authorized VAPT against abraa.co.ke (staging copy). The engagement focused on web application security, input validation, authentication, and common configuration issues. No active exploitation of production data was performed. The assessment identified X findings (0 critical, 2 high, 3 medium, 4 low) with recommended mitigations. Immediate attention is recommended for the high-severity issues._
+To request a private assessment or retest:
+📧 ishekh@alumni.cmu.edu
 
 ---
 
-## 8. Legal & Ethics Reminder
-Always obtain written permission. This repository is a template for educational and authorized testing only.
+##  About CySentra
+Founded in 2025, CySentra aims to bridge **hands-on security engineering**  
+with research-driven policy and innovation** across Africa and beyond.
+
+We focus on **open-source tools**, community education, and responsible testing.
+
+---
+
+## 💼 Services Offered 
+| Service Area | Description |
+|--------------|-------------|
+| VAPT (Web/API) | Authorized assessments with documented reporting |
+| SOC Engineering | SIEM deployment, Wazuh/Splunk monitoring, alert tuning |
+| ICS/OT Security | Process monitoring, anomaly detection, network defense |
+| Policy & Compliance | GDPR, CBK, EAC frameworks – gap analysis |
+| Threat Research | Custom tools & malware analysis |
+
+---
+
