@@ -51,7 +51,7 @@ Aligned with:
 
 ## Detailed Report
 📄 Full technical report published on Medium:
- [Read the full VAPT report][(PASTE_YOUR_MEDIUM_LINK_HERE](https://medium.com/@isheikh_24798/web-application-penetration-testing-report-87f80e355c9f?postPublishedType=initial))
+ [Read the full VAPT report](https://medium.com/@isheikh_24798/web-application-penetration-testing-report-87f80e355c9f?postPublishedType=initial))
 
 ---
 
