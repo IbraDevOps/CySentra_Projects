@@ -2,16 +2,16 @@ VAmPI API Security VAPT
 
 OWASP API Top 10–Aligned Assessment
 
-📌 Overview
+ Overview
 
 This repository documents a professional Vulnerability Assessment & Penetration Testing (VAPT) conducted against VAmPI (Vulnerable API), an intentionally vulnerable REST API designed to demonstrate common API security weaknesses.
 
 The assessment follows a methodology-driven approach, focusing on authorization, authentication, object ownership, business logic flaws, and API design weaknesses, aligned with the OWASP API Security Top 10.
 
-⚠️ Disclaimer
+ Disclaimer
 This assessment was performed against a local, intentionally vulnerable lab for educational and research purposes only.
 
-🎯 Objectives
+ Objectives
 
 Build a complete API inventory
 
@@ -23,7 +23,7 @@ Demonstrate realistic API abuse scenarios
 
 Produce clear, remediation-focused findings
 
-🧪 Scope
+ Scope
 In-Scope
 
 REST API endpoints exposed by VAmPI
@@ -50,7 +50,8 @@ Base URL	http://127.0.0.1:5000
 API Spec	/openapi.json
 Tester	Ibrahim Sheikh
 Platform	Local Lab (Kali Linux)
-🧩 High-Level API Resources
+
+ High-Level API Resources
 
 The API exposes the following primary resources:
 
@@ -62,7 +63,8 @@ db-init	Database initialization endpoint
 
 These resources form the entire attack surface for this assessment.
 
-🔐 Authentication Model (Observed)
+
+ Authentication Model (Observed)
 
 Token-based authentication (JWT)
 
@@ -70,7 +72,8 @@ Token supplied via Authorization header
 
 Role/ownership checks appear inconsistent (to be validated)
 
-📚 API Inventory (Initial)
+
+ API Inventory 
 
 This inventory defines what exists before testing what breaks.
 
@@ -86,7 +89,8 @@ Endpoint	Method	Auth Required	Object
 /books/{id}	DELETE	Yes	book_id
 /db-init	POST	No / Weak	database
 
-📌 Inventory will be expanded as testing progresses.
+ Inventory will be expanded as testing progresses.
+ 
 
 👤 Baseline User Journey
 
@@ -106,7 +110,8 @@ View/update/delete own book
 
 All vulnerabilities are identified relative to this baseline.
 
-🛠️ Methodology
+
+ Methodology
 
 The assessment follows the OWASP API Security Top 10 with emphasis on:
 
@@ -124,7 +129,8 @@ API9: Improper Inventory Management
 
 Testing is performed in controlled stages, prioritizing authorization and logic flaws over injection-based issues.
 
-📌 Findings Structure
+
+Findings Structure
 
 Each finding includes:
 
@@ -140,7 +146,8 @@ Risk level
 
 Remediation guidance
 
-📈 Status
+
+ Status
 
  Scope defined
 
@@ -153,6 +160,7 @@ Remediation guidance
  Findings documentation
 
  Final report
+ 
 
 🔚 Conclusion
 
