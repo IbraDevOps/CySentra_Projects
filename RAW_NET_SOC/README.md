@@ -68,6 +68,11 @@ File integrity monitoring
 
 
  Deployment Phases
+
+
+
+
+ 
 Phase 1 — Endpoint Core  SOC 
 
 Install Wazuh Manager
@@ -77,6 +82,8 @@ Deploy Wazuh Agent on one Windows machine
 Enable Sysmon
 
 Verify alerts & dashboards
+
+
 
 
 
