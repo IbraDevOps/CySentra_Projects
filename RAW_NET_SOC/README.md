@@ -23,37 +23,14 @@ Scale gradually from 1 machine to full office
 
 
 
- 
- Endpoints (Windows/Linux) ------------------>  Wazuh Manager 
+  
+ Endpoints (Windows/Linux) ------------------>  Wazuh Manager (Filebeat / Indexing) -------------------------->Elastic --------------------> Kibana Dashboards & Alerts
         │
         │  (Wazuh Agent)
         ▼
 
 
-
-
-
-
-
-
-        
- Wazuh Manager 
-        │
-        │  (Filebeat / Indexing)
-        ▼
-
-        
- Elasticsearch 
-        │
-        ▼
-
-
-        
- Kibana Dashboards & Alerts 
-
-
-
- MISP 
+MISP 
   └── Threat Intelligence (IOCs, Feeds)
       ↳ Enrichment for detections
 
