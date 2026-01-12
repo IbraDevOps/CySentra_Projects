@@ -18,27 +18,43 @@ Enrich detections with threat intelligence
 
 Scale gradually from 1 machine to full office
 
-🏗️ High-Level Architecture
+ High-Level Architecture
+
+ 
  Endpoints (Windows/Linux
         │
         │  (Wazuh Agent)
         ▼
+
+
+        
  Wazuh Manager 
         │
         │  (Filebeat / Indexing)
         ▼
+
+        
  Elasticsearch 
         │
         ▼
+
+
+        
  Kibana Dashboards & Alerts 
+
+
 
  MISP 
   └── Threat Intelligence (IOCs, Feeds)
       ↳ Enrichment for detections
 
 
+
+
 [ Network Sensor ]
   └── Zeek / Suricata → Elasticsearch
+
+  
 
  Virtual Machines
 VM	Purpose	Components
@@ -46,6 +62,8 @@ VM-1	Log Storage & Visualization	Elasticsearch, Kibana
 VM-2	Detection & SIEM	Wazuh Manager, API
 VM-3	Threat Intelligence	MISP
 VM-4 	Network Visibility	Zeek / Suricata
+
+
 
 Initial deployment uses VM-1 + VM-2 only. Others are added later.
 
@@ -61,6 +79,9 @@ File integrity monitoring
 
  Network metadata & IDS alerts
 
+
+
+
  Deployment Phases
 Phase 1 — Endpoint Core  SOC 
 
@@ -72,11 +93,17 @@ Enable Sysmon
 
 Verify alerts & dashboards
 
+
+
+
 Phase 2 — Scale Endpoints
 
 Roll out agents to remaining office PCs
 
 Tune rules & reduce noise
+
+
+
 
 Phase 3 — Threat Intelligence
 
@@ -85,6 +112,9 @@ Deploy MISP
 Add curated feeds
 
 Correlate IOCs with alerts
+
+
+
 
 Phase 4 — Network Monitoring (Optional)
 
