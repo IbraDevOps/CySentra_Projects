@@ -20,11 +20,20 @@ Scale gradually from 1 machine to full office
 
  High-Level Architecture
 
+
+
+
  
- Endpoints (Windows/Linux
+ Endpoints (Windows/Linux) ------------------>  Wazuh Manager 
         │
         │  (Wazuh Agent)
         ▼
+
+
+
+
+
+
 
 
         
