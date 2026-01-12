@@ -159,7 +159,7 @@ Remediation guidance
 
  Findings documentation
 
- Final report
+ Final report on Medium:https://medium.com/@isheikh_24798/breaking-a-modern-api-a-full-owasp-api-top-10-vapt-deep-dive-on-vampi-dd4f0bd40912?postPublishedType=initial
  
 
 🔚 Conclusion
