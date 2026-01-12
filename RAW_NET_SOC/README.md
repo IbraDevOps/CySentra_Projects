@@ -24,10 +24,9 @@ Scale gradually from 1 machine to full office
 
 
   
- Endpoints (Windows/Linux) ------------------>  Wazuh Manager (Filebeat / Indexing) -------------------------->Elastic --------------------> Kibana Dashboards & Alerts
-        │
-        │  (Wazuh Agent)
-        ▼
+ Endpoints like Windows &Linux ------------------>  Wazuh Manager (Filebeat / Indexing) -------------------------->Elastic --------------------> Kibana Dashboards & Alerts
+        (Wazuh Agent)
+
 
 
 MISP 
