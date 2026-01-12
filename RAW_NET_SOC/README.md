@@ -1,16 +1,16 @@
 RAW_NET_SOC — Open-Source SOC Architecture (Small Office)
 Overview
 
-RAW_NET_SOC is an open-source Security Operations Center (SOC) project designed for a small office environment (~10 endpoints).
+RAW_NET_SOC is an open-source Security Operations Center (SOC) project designed for a SME business office environment.
 The goal is to build realistic SOC visibility using only open-source tools, starting from endpoint detection and expanding into network monitoring and threat intelligence.
 
-This repository documents architecture, design decisions, and deployment strategy — not sensitive credentials or live configurations.
+This repository documents architecture, design decisions, and deployment strategy  not sensitive credentials or live configurations.
 
-🎯 Objectives
+ Objectives
 
 Centralize security logs from endpoints
 
-Detect malicious activity (auth abuse, malware, persistence)
+Detect malicious activity like auth abuse, malware, persistence
 
 Correlate events and generate alerts
 
@@ -19,39 +19,39 @@ Enrich detections with threat intelligence
 Scale gradually from 1 machine to full office
 
 🏗️ High-Level Architecture
-[ Endpoints (Windows/Linux) ]
+ Endpoints (Windows/Linux
         │
         │  (Wazuh Agent)
         ▼
-[ Wazuh Manager ]
+ Wazuh Manager 
         │
         │  (Filebeat / Indexing)
         ▼
-[ Elasticsearch ]
+ Elasticsearch 
         │
         ▼
-[ Kibana Dashboards & Alerts ]
+ Kibana Dashboards & Alerts 
 
-[ MISP ]
+ MISP 
   └── Threat Intelligence (IOCs, Feeds)
       ↳ Enrichment for detections
 
-(Optional)
+
 [ Network Sensor ]
   └── Zeek / Suricata → Elasticsearch
 
-🖥️ Virtual Machines
+ Virtual Machines
 VM	Purpose	Components
 VM-1	Log Storage & Visualization	Elasticsearch, Kibana
 VM-2	Detection & SIEM	Wazuh Manager, API
 VM-3	Threat Intelligence	MISP
-VM-4 (optional)	Network Visibility	Zeek / Suricata
+VM-4 	Network Visibility	Zeek / Suricata
 
 Initial deployment uses VM-1 + VM-2 only. Others are added later.
 
-📊 Data Sources
+ Data Sources
 
-Endpoint logs (Windows Event Logs, Sysmon)
+Endpoint logs like Windows Event Logs, Sysmon
 
 Linux audit logs
 
@@ -59,10 +59,10 @@ Authentication activity
 
 File integrity monitoring
 
-(Later) Network metadata & IDS alerts
+ Network metadata & IDS alerts
 
-🚦 Deployment Phases
-Phase 1 — Endpoint SOC (Core)
+ Deployment Phases
+Phase 1 — Endpoint Core  SOC 
 
 Install Wazuh Manager
 
@@ -94,7 +94,7 @@ Monitor traffic via SPAN/mirror
 
 Correlate with endpoint events
 
-🔒 Security Notes
+ Security Notes
 
 No credentials, secrets, or live IPs stored in this repo
 
