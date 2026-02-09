@@ -1,7 +1,7 @@
-# Network Overview — Abra Traders (As-Is)
+# Network Overview — Abr LTD (As-Is)
 
 ## Internet Connectivity
-Abra Traders receives internet connectivity from a local Internet Service Provider (ISP). The ISP cable terminates into a single router installed within the office premises.
+AB LTD receives internet connectivity from a local Internet Service Provider (ISP). The ISP cable terminates into a single router installed within the office premises.
 
 ## Router & Wireless Network
 The router performs the following functions:
