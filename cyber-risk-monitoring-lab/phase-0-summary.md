@@ -1,6 +1,6 @@
-# Phase 0 Summary — Abra Traders
+# Phase 0 Summary - AB LTD
 
-Phase 0 establishes a clear and realistic understanding of Abra Traders’ operating environment before the introduction of any cybersecurity controls.
+Phase 0 establishes a clear and realistic understanding of ABs’ operating environment before the introduction of any cybersecurity controls.
 
 The organization operates a flat Wi-Fi network connecting all employee devices, personal smartphones, printers, and CCTV cameras through a single ISP-provided router. Critical business systems, including internet banking platforms, Sage Accounting, and Google Sheets, are accessed over this network without centralized monitoring or access control.
 
