@@ -1,4 +1,4 @@
-# Asset Inventory — Abra Traders
+# Asset Inventory — AB LTD
 
 ## Endpoints
 - 10–15 employee laptops / desktop PCs (primarily Windows)
