@@ -31,3 +31,11 @@ This project focuses on:
 ## Status
 🚧 Planning + environment setup in progress.
 See `ROADMAP.md`.
+
+
+
+## Disclaimer
+
+This project is based on a fictionalized composite organization created for educational and research purposes. 
+Any resemblance to real companies, systems, or individuals is purely coincidental. 
+No real organizational data, credentials, or configurations are used.
