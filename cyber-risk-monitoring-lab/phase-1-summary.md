@@ -44,3 +44,10 @@ Risk levels
 3–4 → Medium
 
 6–9 → High / Critical
+
+## Priority Focus
+
+The highest immediate risks are phishing-based credential theft and endpoint malware infection. 
+Monitoring and visibility efforts in subsequent phases will prioritize these areas.
+
+
