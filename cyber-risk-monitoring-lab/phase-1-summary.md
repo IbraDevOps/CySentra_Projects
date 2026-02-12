@@ -1,4 +1,4 @@
-# Phase 1 Summary — Asset Criticality & Risk
+# Phase 1 Summary - Asset Criticality & Risk
 
 The highest risks are driven by human-facing systems rather than infrastructure complexity. 
 Email, messaging platforms, and browser-based financial systems represent the most critical attack paths due to high usage and limited security controls.
@@ -13,7 +13,7 @@ These findings justify prioritizing visibility and monitoring over perimeter har
 | **Medium**   | Productivity impact                          |
 | **Low**      | Limited or indirect impact                   |
 
-Risk Scoring Model (Simple & Defensible)
+Risk Scoring Model:
 
 We use a qualitative risk model:
 
