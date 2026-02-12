@@ -1,4 +1,4 @@
-# Asset Criticality — Phase 1
+# Asset Criticality - Phase 1
 
 | Asset                    | Description                         | Tier      | Rationale                               |
 |--------------------------|-------------------------------------|-----------|------------------------------------------|
