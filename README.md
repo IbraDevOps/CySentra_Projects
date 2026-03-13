@@ -47,5 +47,9 @@ We focus on **open-source tools**, community education, and responsible testing.
 | Policy & Compliance | GDPR, CBK, EAC frameworks – gap analysis |
 | Threat Research | Custom tools & malware analysis |
 
+Email: ishekh@alumni.cmu.edu
+
+LinkedIn: [(https://www.linkedin.com/in/ibrahim-sheikh-4b87361b6/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BA%2F%2BHt80SRiClVr%2FbY6ZzAg%3D%3D)]
+
 ---
 
