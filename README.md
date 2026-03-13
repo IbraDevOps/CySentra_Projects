@@ -1,8 +1,8 @@
 # CySentra Cybersecurity – Research & Engineering Portfolio
 
 CySentra is a cybersecurity initiative focused on:
--  Threat Detection & SOC Engineering (Blue Team)
--  Web & API Security Research (Red Team)
+-  Threat Detection & SOC Engineering in Blue Team
+-  Web & API Security Research in Red Team
 -  ICS / OT Security & Network Monitoring
 -  AI in Cybersecurity i.e RAG, LLM-assisted audits
 -  Data Protection & Policy Analysis (GDPR, Kenya DPA, CBK, RURA)
@@ -32,8 +32,7 @@ To request a private assessment or retest:
 ---
 
 ##  About CySentra
-Founded in 2025, CySentra aims to bridge **hands-on security engineering**  
-with research-driven policy and innovation** across Africa and beyond.
+CySentra is a cybersecurity consulting and research practice focused on web/API security testing, security engineering, and risk-informed advisory. This repository showcases selected public labs, case studies, and research artifacts. Client-specific assessments remain private and are shared only with authorized parties.
 
 We focus on **open-source tools**, community education, and responsible testing.
 
