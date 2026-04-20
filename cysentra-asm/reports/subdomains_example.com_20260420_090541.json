@@ -1,0 +1,23 @@
+{
+    "target_domain": "example.com",
+    "scan_type": "subdomain_discovery",
+    "timestamp_utc": "20260420_090541",
+    "count": 15,
+    "subdomains": [
+        "admin.example.com",
+        "api.example.com",
+        "app.example.com",
+        "auth.example.com",
+        "blog.example.com",
+        "dashboard.example.com",
+        "dev.example.com",
+        "m.example.com",
+        "mail.example.com",
+        "portal.example.com",
+        "secure.example.com",
+        "staging.example.com",
+        "test.example.com",
+        "vpn.example.com",
+        "www.example.com"
+    ]
+}
