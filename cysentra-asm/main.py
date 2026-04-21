@@ -1,5 +1,6 @@
 import argparse
 from datetime import UTC, datetime
+from typing import Any, Dict, List
 
 from collectors.dns import DNSCollector
 from collectors.subdomains import SubdomainCollector
@@ -9,16 +10,28 @@ from core.diff import diff_assets
 from core.utils import ensure_directory, save_json
 
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("domain", help="Target domain")
-    parser.add_argument("--output-dir", default="reports")
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="CySentra ASM - External Attack Surface Monitoring"
+    )
+    parser.add_argument("domain", help="Target domain (e.g. example.com)")
+    parser.add_argument(
+        "--output-dir",
+        default="reports",
+        help="Directory where JSON reports will be saved",
+    )
     return parser.parse_args()
 
 
-def merge_asset_data(dns_results, web_results):
+def merge_asset_data(
+    dns_results: List[Dict[str, Any]],
+    web_results: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """
+    Merge DNS validation results with web fingerprinting results.
+    """
     web_index = {item["subdomain"]: item for item in web_results}
-    merged = []
+    merged: List[Dict[str, Any]] = []
 
     for dns_item in dns_results:
         host = dns_item["subdomain"]
@@ -27,74 +40,98 @@ def merge_asset_data(dns_results, web_results):
         http_data = web_item.get("http", {})
         https_data = web_item.get("https", {})
 
-        merged.append({
-            "subdomain": host,
-            "resolves": dns_item["resolves"],
-            "ip_addresses": dns_item.get("ip_addresses", []),
-            "http_status": http_data.get("status_code"),
-            "https_status": https_data.get("status_code"),
-            "http_title": http_data.get("title"),
-            "https_title": https_data.get("title"),
-            "http_server": http_data.get("headers", {}).get("Server"),
-            "https_server": https_data.get("headers", {}).get("Server"),
-        })
+        merged.append(
+            {
+                "subdomain": host,
+                "resolves": dns_item["resolves"],
+                "ip_addresses": dns_item.get("ip_addresses", []),
+                "http_status": http_data.get("status_code"),
+                "https_status": https_data.get("status_code"),
+                "http_title": http_data.get("title"),
+                "https_title": https_data.get("title"),
+                "http_server": http_data.get("headers", {}).get("Server"),
+                "https_server": https_data.get("headers", {}).get("Server"),
+            }
+        )
 
     return merged
 
 
-def main():
-    args = parse_args()
-    ensure_directory(args.output_dir)
+def build_initial_diff(current_assets: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """
+    For the first baseline scan, only resolved assets count as new hosts.
+    """
+    new_hosts = [
+        asset["subdomain"]
+        for asset in current_assets
+        if asset.get("resolves")
+    ]
 
-    timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
-
-    subdomains = SubdomainCollector(args.domain).collect()
-    dns_results = DNSCollector(subdomains).collect()
-    resolved_hosts = [item["subdomain"] for item in dns_results if item["resolves"]]
-    web_results = WebCollector(resolved_hosts).collect()
-
-    merged_assets = merge_asset_data(dns_results, web_results)
-
-    db = DatabaseManager()
-    scan_id = db.insert_scan(args.domain, "web_fingerprinting", timestamp)
-
-    for asset in merged_assets:
-        db.insert_asset(scan_id, asset)
-
-    previous_scan_id = db.get_previous_scan_id(args.domain, scan_id)
-    previous_assets = db.get_assets_by_scan_id(previous_scan_id) if previous_scan_id else []
-    current_assets = db.get_assets_by_scan_id(scan_id)
-
-    diff_results = diff_assets(previous_assets, current_assets) if previous_scan_id else {
-        "new_hosts": [asset["subdomain"] for asset in current_assets],
+    return {
+        "new_hosts": new_hosts,
         "removed_hosts": [],
         "changed_hosts": [],
     }
 
-    output_file = f"{args.output_dir}/phase4_scan_{args.domain}_{timestamp}.json"
 
-    report = {
-        "target_domain": args.domain,
-        "scan_type": "storage_and_diff",
-        "timestamp_utc": timestamp,
-        "scan_id": scan_id,
-        "previous_scan_id": previous_scan_id,
-        "generated_candidates": len(subdomains),
-        "resolved_assets": len(resolved_hosts),
-        "fingerprinted_assets": len(web_results),
-        "diff_summary": {
-            "new_hosts": len(diff_results["new_hosts"]),
-            "removed_hosts": len(diff_results["removed_hosts"]),
-            "changed_hosts": len(diff_results["changed_hosts"]),
-        },
-        "diff_results": diff_results,
-        "dns_results": dns_results,
-        "web_results": web_results,
-    }
+def print_recon_summary(
+    subdomains: List[str],
+    dns_results: List[Dict[str, Any]],
+    web_results: List[Dict[str, Any]],
+) -> None:
+    """
+    Print recon-style details to the terminal.
+    """
+    if subdomains:
+        print("\n[+] Candidate Subdomains:")
+        for subdomain in subdomains:
+            print(f"    - {subdomain}")
 
-    save_json(report, output_file)
+    resolved_assets = [item for item in dns_results if item["resolves"]]
+    if resolved_assets:
+        print("\n[+] Resolved Assets:")
+        for item in resolved_assets:
+            ips = ", ".join(item["ip_addresses"]) if item["ip_addresses"] else "N/A"
+            print(f"    - {item['subdomain']} -> {ips}")
 
-    print(f"[+] Target: {args.domain}")
+    if web_results:
+        print("\n[+] Web Fingerprinting:")
+        for item in web_results:
+            print(f"    - Host: {item['subdomain']}")
+
+            for scheme in ("http", "https"):
+                result = item.get(scheme, {})
+
+                if result.get("reachable"):
+                    print(
+                        f"        [{scheme.upper()}] {result.get('status_code')} "
+                        f"-> {result.get('final_url')}"
+                    )
+
+                    if result.get("title"):
+                        print(f"            Title: {result['title']}")
+
+                    server = result.get("headers", {}).get("Server")
+                    if server:
+                        print(f"            Server: {server}")
+                else:
+                    print(f"        [{scheme.upper()}] Unreachable")
+
+
+def print_diff_summary(
+    domain: str,
+    scan_id: int,
+    previous_scan_id: int | None,
+    subdomains: List[str],
+    resolved_hosts: List[str],
+    web_results: List[Dict[str, Any]],
+    diff_results: Dict[str, Any],
+    output_file: str,
+) -> None:
+    """
+    Print monitoring / diff summary to the terminal.
+    """
+    print(f"[+] Target: {domain}")
     print(f"[+] Scan ID: {scan_id}")
     print(f"[+] Previous Scan ID: {previous_scan_id}")
     print(f"[+] Candidates: {len(subdomains)}")
@@ -122,7 +159,86 @@ def main():
             for field, values in item["changes"].items():
                 print(f"        {field}: {values['previous']} -> {values['current']}")
 
-    db.close()
+
+def main() -> None:
+    args = parse_args()
+    ensure_directory(args.output_dir)
+
+    timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
+
+    # Phase 1: Candidate generation
+    subdomains = SubdomainCollector(args.domain).collect()
+
+    # Phase 2: DNS validation
+    dns_results = DNSCollector(subdomains).collect()
+    resolved_hosts = [item["subdomain"] for item in dns_results if item["resolves"]]
+
+    # Phase 3: Web fingerprinting
+    web_results = WebCollector(resolved_hosts).collect()
+
+    # Phase 4: Merge + store + diff
+    merged_assets = merge_asset_data(dns_results, web_results)
+
+    db = DatabaseManager()
+    try:
+        scan_id = db.insert_scan(args.domain, "storage_and_diff", timestamp)
+
+        for asset in merged_assets:
+            db.insert_asset(scan_id, asset)
+
+        previous_scan_id = db.get_previous_scan_id(args.domain, scan_id)
+        previous_assets = (
+            db.get_assets_by_scan_id(previous_scan_id) if previous_scan_id else []
+        )
+        current_assets = db.get_assets_by_scan_id(scan_id)
+
+        if previous_scan_id:
+            diff_results = diff_assets(previous_assets, current_assets)
+        else:
+            diff_results = build_initial_diff(current_assets)
+
+        output_file = f"{args.output_dir}/phase4_scan_{args.domain}_{timestamp}.json"
+
+        report = {
+            "target_domain": args.domain,
+            "scan_type": "storage_and_diff",
+            "timestamp_utc": timestamp,
+            "scan_id": scan_id,
+            "previous_scan_id": previous_scan_id,
+            "generated_candidates": len(subdomains),
+            "resolved_assets": len(resolved_hosts),
+            "fingerprinted_assets": len(web_results),
+            "diff_summary": {
+                "new_hosts": len(diff_results["new_hosts"]),
+                "removed_hosts": len(diff_results["removed_hosts"]),
+                "changed_hosts": len(diff_results["changed_hosts"]),
+            },
+            "diff_results": diff_results,
+            "dns_results": dns_results,
+            "web_results": web_results,
+        }
+
+        save_json(report, output_file)
+
+        print_diff_summary(
+            domain=args.domain,
+            scan_id=scan_id,
+            previous_scan_id=previous_scan_id,
+            subdomains=subdomains,
+            resolved_hosts=resolved_hosts,
+            web_results=web_results,
+            diff_results=diff_results,
+            output_file=output_file,
+        )
+
+        print_recon_summary(
+            subdomains=subdomains,
+            dns_results=dns_results,
+            web_results=web_results,
+        )
+
+    finally:
+        db.close()
 
 
 if __name__ == "__main__":

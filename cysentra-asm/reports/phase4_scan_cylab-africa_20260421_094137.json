@@ -1,0 +1,113 @@
+{
+    "target_domain": "cylab-africa",
+    "scan_type": "storage_and_diff",
+    "timestamp_utc": "20260421_094137",
+    "scan_id": 6,
+    "previous_scan_id": 5,
+    "generated_candidates": 15,
+    "resolved_assets": 0,
+    "fingerprinted_assets": 0,
+    "diff_summary": {
+        "new_hosts": 0,
+        "removed_hosts": 0,
+        "changed_hosts": 0
+    },
+    "diff_results": {
+        "new_hosts": [],
+        "removed_hosts": [],
+        "changed_hosts": []
+    },
+    "dns_results": [
+        {
+            "subdomain": "admin.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "api.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "app.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "auth.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "blog.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "dashboard.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "dev.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "m.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "mail.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "portal.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "secure.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "staging.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "test.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "vpn.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "www.cylab-africa",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        }
+    ],
+    "web_results": []
+}
