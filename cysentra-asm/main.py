@@ -1,54 +1,59 @@
 import argparse
-from datetime import datetime
+from datetime import datetime, UTC
 
 from collectors.subdomains import SubdomainCollector
+from collectors.dns import DNSCollector
 from core.utils import ensure_directory, save_json
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="CySentra ASM - External Attack Surface Monitoring"
-    )
-    parser.add_argument(
-        "domain",
-        help="Target domain to monitor (e.g. example.com)",
-    )
-    parser.add_argument(
-        "--output-dir",
-        default="reports",
-        help="Directory where JSON output will be saved",
-    )
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("domain", help="Target domain")
+    parser.add_argument("--output-dir", default="reports")
     return parser.parse_args()
 
 
-def main() -> None:
+def main():
     args = parse_args()
 
     ensure_directory(args.output_dir)
 
-    collector = SubdomainCollector(args.domain)
-    subdomains = collector.collect()
+    # Phase 1
+    subdomains = SubdomainCollector(args.domain).collect()
 
-    timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
-    output_file = f"{args.output_dir}/subdomains_{args.domain}_{timestamp}.json"
+    # Phase 2
+    dns_results = DNSCollector(subdomains).collect()
 
-    results = {
+    timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
+
+    output_file = (
+        f"{args.output_dir}/dns_scan_{args.domain}_{timestamp}.json"
+    )
+
+    resolved_count = sum(1 for x in dns_results if x["resolves"])
+
+    report = {
         "target_domain": args.domain,
-        "scan_type": "subdomain_discovery",
+        "scan_type": "dns_validation",
         "timestamp_utc": timestamp,
-        "count": len(subdomains),
-        "subdomains": subdomains,
+        "generated_candidates": len(subdomains),
+        "resolved_assets": resolved_count,
+        "results": dns_results,
     }
 
-    save_json(results, output_file)
+    save_json(report, output_file)
 
-    print(f"[+] Target domain: {args.domain}")
-    print(f"[+] Subdomains generated: {len(subdomains)}")
-    print(f"[+] Results saved to: {output_file}")
+    print(f"[+] Target: {args.domain}")
+    print(f"[+] Candidates: {len(subdomains)}")
+    print(f"[+] Resolved: {resolved_count}")
+    print(f"[+] Report: {output_file}")
 
-    for subdomain in subdomains:
-        print(f"    - {subdomain}")
-
+    for item in dns_results:
+        if item["resolves"]:
+            print(
+                f"    [+] {item['subdomain']} -> "
+                f"{', '.join(item['ip_addresses'])}"
+            )
 
 if __name__ == "__main__":
     main()

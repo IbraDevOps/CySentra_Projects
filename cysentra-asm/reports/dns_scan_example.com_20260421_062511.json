@@ -1,0 +1,99 @@
+{
+    "target_domain": "example.com",
+    "scan_type": "dns_validation",
+    "timestamp_utc": "20260421_062511",
+    "generated_candidates": 15,
+    "resolved_assets": 0,
+    "results": [
+        {
+            "subdomain": "admin.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "api.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "app.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "auth.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "blog.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "dashboard.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "dev.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "m.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "mail.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "portal.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "secure.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "staging.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "test.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "vpn.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "www.example.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        }
+    ]
+}
