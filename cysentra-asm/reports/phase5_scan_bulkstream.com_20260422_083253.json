@@ -1,0 +1,327 @@
+{
+    "target_domain": "bulkstream.com",
+    "scan_type": "risk_scored_monitoring",
+    "timestamp_utc": "20260422_083253",
+    "scan_id": 12,
+    "previous_scan_id": 10,
+    "generated_candidates": 15,
+    "resolved_assets": 4,
+    "fingerprinted_assets": 4,
+    "diff_summary": {
+        "new_hosts": 0,
+        "removed_hosts": 0,
+        "changed_hosts": 0
+    },
+    "diff_results": {
+        "new_hosts": [],
+        "removed_hosts": [],
+        "changed_hosts": []
+    },
+    "risk_findings": [
+        {
+            "subdomain": "dev.bulkstream.com",
+            "score": 35,
+            "severity": "MEDIUM",
+            "reasons": [
+                "Login portal exposed"
+            ]
+        },
+        {
+            "subdomain": "portal.bulkstream.com",
+            "score": 35,
+            "severity": "MEDIUM",
+            "reasons": [
+                "Login portal exposed"
+            ]
+        },
+        {
+            "subdomain": "dashboard.bulkstream.com",
+            "score": 10,
+            "severity": "LOW",
+            "reasons": [
+                "Resolves but no web response"
+            ]
+        },
+        {
+            "subdomain": "www.bulkstream.com",
+            "score": 10,
+            "severity": "LOW",
+            "reasons": [
+                "Resolves but no web response"
+            ]
+        },
+        {
+            "subdomain": "admin.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "api.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "app.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "auth.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "blog.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "m.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "mail.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "secure.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "staging.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "test.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "vpn.bulkstream.com",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        }
+    ],
+    "dns_results": [
+        {
+            "subdomain": "admin.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "api.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "app.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "auth.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "blog.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "dashboard.bulkstream.com",
+            "resolves": true,
+            "ip_addresses": [
+                "105.27.209.18"
+            ],
+            "public_ip": true
+        },
+        {
+            "subdomain": "dev.bulkstream.com",
+            "resolves": true,
+            "ip_addresses": [
+                "105.27.209.21"
+            ],
+            "public_ip": true
+        },
+        {
+            "subdomain": "m.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "mail.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "portal.bulkstream.com",
+            "resolves": true,
+            "ip_addresses": [
+                "105.27.209.22"
+            ],
+            "public_ip": true
+        },
+        {
+            "subdomain": "secure.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "staging.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "test.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "vpn.bulkstream.com",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "www.bulkstream.com",
+            "resolves": true,
+            "ip_addresses": [
+                "105.27.208.139"
+            ],
+            "public_ip": true
+        }
+    ],
+    "web_results": [
+        {
+            "subdomain": "dashboard.bulkstream.com",
+            "http": {
+                "url": "http://dashboard.bulkstream.com",
+                "reachable": false,
+                "status_code": null,
+                "final_url": null,
+                "title": null,
+                "headers": {},
+                "error": "HTTPSConnectionPool(host='dashboard.bulkstream.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1033)')))"
+            },
+            "https": {
+                "url": "https://dashboard.bulkstream.com",
+                "reachable": false,
+                "status_code": null,
+                "final_url": null,
+                "title": null,
+                "headers": {},
+                "error": "HTTPSConnectionPool(host='dashboard.bulkstream.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1033)')))"
+            }
+        },
+        {
+            "subdomain": "dev.bulkstream.com",
+            "http": {
+                "url": "http://dev.bulkstream.com",
+                "reachable": true,
+                "status_code": 200,
+                "final_url": "https://dev.bulkstream.com/login",
+                "title": "Login -  Bulkstream Terminal Operating System",
+                "headers": {
+                    "Server": "Apache",
+                    "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+                    "Content-Security-Policy": null,
+                    "X-Frame-Options": "SAMEORIGIN",
+                    "X-Content-Type-Options": "nosniff",
+                    "Referrer-Policy": null
+                },
+                "error": null
+            },
+            "https": {
+                "url": "https://dev.bulkstream.com",
+                "reachable": true,
+                "status_code": 200,
+                "final_url": "https://dev.bulkstream.com/login",
+                "title": "Login -  Bulkstream Terminal Operating System",
+                "headers": {
+                    "Server": "Apache",
+                    "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+                    "Content-Security-Policy": null,
+                    "X-Frame-Options": "SAMEORIGIN",
+                    "X-Content-Type-Options": "nosniff",
+                    "Referrer-Policy": null
+                },
+                "error": null
+            }
+        },
+        {
+            "subdomain": "portal.bulkstream.com",
+            "http": {
+                "url": "http://portal.bulkstream.com",
+                "reachable": false,
+                "status_code": null,
+                "final_url": null,
+                "title": null,
+                "headers": {},
+                "error": "HTTPConnectionPool(host='portal.bulkstream.com', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f040b01bb10>, 'Connection to portal.bulkstream.com timed out. (connect timeout=5)'))"
+            },
+            "https": {
+                "url": "https://portal.bulkstream.com",
+                "reachable": true,
+                "status_code": 200,
+                "final_url": "https://portal.bulkstream.com/login",
+                "title": "Login -  Bulkstream Terminal Operating System",
+                "headers": {
+                    "Server": null,
+                    "Strict-Transport-Security": null,
+                    "Content-Security-Policy": null,
+                    "X-Frame-Options": null,
+                    "X-Content-Type-Options": null,
+                    "Referrer-Policy": null
+                },
+                "error": null
+            }
+        },
+        {
+            "subdomain": "www.bulkstream.com",
+            "http": {
+                "url": "http://www.bulkstream.com",
+                "reachable": false,
+                "status_code": null,
+                "final_url": null,
+                "title": null,
+                "headers": {},
+                "error": "HTTPSConnectionPool(host='www.bulkstream.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1033)')))"
+            },
+            "https": {
+                "url": "https://www.bulkstream.com",
+                "reachable": false,
+                "status_code": null,
+                "final_url": null,
+                "title": null,
+                "headers": {},
+                "error": "HTTPSConnectionPool(host='www.bulkstream.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1033)')))"
+            }
+        }
+    ]
+}
