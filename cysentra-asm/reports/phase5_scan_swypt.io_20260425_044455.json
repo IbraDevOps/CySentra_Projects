@@ -1,0 +1,609 @@
+{
+    "target_domain": "swypt.io",
+    "scan_type": "risk_scored_monitoring",
+    "timestamp_utc": "20260425_044455",
+    "scan_id": 15,
+    "previous_scan_id": 14,
+    "generated_candidates": 15,
+    "resolved_assets": 0,
+    "fingerprinted_assets": 0,
+    "diff_summary": {
+        "new_hosts": 0,
+        "removed_hosts": 0,
+        "changed_hosts": 15
+    },
+    "diff_results": {
+        "new_hosts": [],
+        "removed_hosts": [],
+        "changed_hosts": [
+            {
+                "subdomain": "admin.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "api.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "app.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.192.74",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "https_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt Dapp",
+                        "current": null
+                    },
+                    "https_title": {
+                        "previous": "Swypt Dapp",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    },
+                    "https_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "auth.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "blog.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "dashboard.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 404,
+                        "current": null
+                    },
+                    "https_status": {
+                        "previous": 404,
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    },
+                    "https_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "dev.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "m.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "mail.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "portal.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "secure.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "staging.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "https_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt Dapp",
+                        "current": null
+                    },
+                    "https_title": {
+                        "previous": "Swypt Dapp",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    },
+                    "https_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "test.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "vpn.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            },
+            {
+                "subdomain": "www.swypt.io",
+                "changes": {
+                    "resolves": {
+                        "previous": 1,
+                        "current": 0
+                    },
+                    "ip_addresses": {
+                        "previous": "173.212.198.89",
+                        "current": ""
+                    },
+                    "http_status": {
+                        "previous": 200,
+                        "current": null
+                    },
+                    "http_title": {
+                        "previous": "Swypt | Take your business global with a new way to pay, get paid and manage your business",
+                        "current": null
+                    },
+                    "http_server": {
+                        "previous": "Apache/2.4.58 (Ubuntu)",
+                        "current": null
+                    }
+                }
+            }
+        ]
+    },
+    "risk_findings": [
+        {
+            "subdomain": "admin.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "api.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "app.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "auth.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "blog.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "dashboard.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "dev.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "m.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "mail.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "portal.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "secure.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "staging.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "test.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "vpn.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        },
+        {
+            "subdomain": "www.swypt.io",
+            "score": 0,
+            "severity": "INFO",
+            "reasons": []
+        }
+    ],
+    "dns_results": [
+        {
+            "subdomain": "admin.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "api.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "app.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "auth.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "blog.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "dashboard.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "dev.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "m.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "mail.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "portal.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "secure.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "staging.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "test.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "vpn.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        },
+        {
+            "subdomain": "www.swypt.io",
+            "resolves": false,
+            "ip_addresses": [],
+            "public_ip": false
+        }
+    ],
+    "web_results": []
+}

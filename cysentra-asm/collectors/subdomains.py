@@ -1,42 +1,31 @@
-from pathlib import Path
+import json
+import subprocess
 from typing import List, Set
 
-from core.utils import normalize_subdomain, is_valid_subdomain
+import requests
+
+from core.utils import is_valid_subdomain, normalize_subdomain
 
 
 DEFAULT_SUBDOMAIN_WORDLIST = [
-    "www",
-    "api",
-    "dev",
-    "test",
-    "staging",
-    "portal",
-    "admin",
-    "mail",
-    "blog",
-    "vpn",
-    "app",
-    "m",
-    "secure",
-    "auth",
-    "dashboard",
+    "www", "api", "dev", "test", "staging", "portal", "admin",
+    "mail", "blog", "vpn", "app", "m", "secure", "auth", "dashboard",
 ]
 
 
 class SubdomainCollector:
     """
-    Collects candidate subdomains for a target domain.
-    Phase 1 uses a simple wordlist-based approach.
+    Collect subdomains from multiple passive sources:
+    - built-in wordlist
+    - crt.sh certificate transparency logs
+    - amass passive mode
     """
 
     def __init__(self, target_domain: str, wordlist: List[str] | None = None) -> None:
         self.target_domain = normalize_subdomain(target_domain)
         self.wordlist = wordlist or DEFAULT_SUBDOMAIN_WORDLIST
 
-    def generate_candidates(self) -> Set[str]:
-        """
-        Generate candidate subdomains from the configured wordlist.
-        """
+    def generate_wordlist_candidates(self) -> Set[str]:
         candidates = set()
 
         for word in self.wordlist:
@@ -44,36 +33,89 @@ class SubdomainCollector:
             if not word:
                 continue
 
-            candidate = f"{word}.{self.target_domain}"
-            candidate = normalize_subdomain(candidate)
+            candidate = normalize_subdomain(f"{word}.{self.target_domain}")
 
             if is_valid_subdomain(candidate, self.target_domain):
                 candidates.add(candidate)
 
         return candidates
 
-    def load_wordlist_from_file(self, file_path: str) -> List[str]:
+    def collect_from_crtsh(self) -> Set[str]:
         """
-        Load additional subdomain prefixes from a file.
-        One entry per line.
+        Collect subdomains from crt.sh certificate transparency data.
         """
-        path = Path(file_path)
+        results = set()
+        url = f"https://crt.sh/?q=%25.{self.target_domain}&output=json"
 
-        if not path.exists():
-            raise FileNotFoundError(f"Wordlist file not found: {file_path}")
+        try:
+            response = requests.get(url, timeout=20)
+            response.raise_for_status()
 
-        words = []
-        with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                item = line.strip().lower()
-                if item:
-                    words.append(item)
+            entries = json.loads(response.text)
 
-        return words
+            for entry in entries:
+                name_value = entry.get("name_value", "")
+                for name in name_value.split("\n"):
+                    cleaned = normalize_subdomain(name.replace("*.", ""))
+                    if is_valid_subdomain(cleaned, self.target_domain):
+                        results.add(cleaned)
+
+        except Exception as exc:
+            print(f"[!] crt.sh lookup failed: {exc}")
+
+        return results
+
+    def collect_from_amass(self) -> Set[str]:
+        """
+        Collect subdomains using Amass passive mode.
+        Requires amass to be installed.
+        """
+        results = set()
+
+        command = [
+            "amass",
+            "enum",
+            "-passive",
+            "-d",
+            self.target_domain,
+        ]
+
+        try:
+            completed = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                timeout=90,
+                check=False,
+            )
+
+            for line in completed.stdout.splitlines():
+                cleaned = normalize_subdomain(line)
+                if is_valid_subdomain(cleaned, self.target_domain):
+                    results.add(cleaned)
+
+            if completed.stderr.strip():
+                print(f"[!] Amass warning: {completed.stderr.strip()}")
+
+        except FileNotFoundError:
+            print("[!] Amass not found. Skipping Amass passive enumeration.")
+        except subprocess.TimeoutExpired:
+            print("[!] Amass passive enumeration timed out.")
+
+        return results
 
     def collect(self) -> List[str]:
         """
-        Return a sorted list of unique candidate subdomains.
+        Collect, merge, deduplicate, and sort discovered subdomains.
         """
-        candidates = self.generate_candidates()
-        return sorted(candidates)
+        all_results = set()
+
+        wordlist_results = self.generate_wordlist_candidates()
+        crtsh_results = self.collect_from_crtsh()
+        amass_results = self.collect_from_amass()
+
+        all_results.update(wordlist_results)
+        all_results.update(crtsh_results)
+        all_results.update(amass_results)
+
+        return sorted(all_results)
