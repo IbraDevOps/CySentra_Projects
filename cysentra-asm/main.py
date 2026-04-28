@@ -7,6 +7,7 @@ from collectors.subdomains import SubdomainCollector
 from collectors.web import WebCollector
 from core.db import DatabaseManager
 from core.diff import diff_assets
+from core.header_analysis import analyze_web_headers
 from core.reporting import print_executive_report
 from core.scoring import score_all_assets
 from core.utils import ensure_directory, save_json
@@ -152,6 +153,32 @@ def print_recon_summary(
                 print(f"        {field}: {values['previous']} -> {values['current']}")
 
 
+def print_header_analysis(header_results: List[Dict[str, Any]]) -> None:
+    print("\n[+] Security Header Analysis")
+
+    any_findings = False
+
+    for item in header_results:
+        subdomain = item["subdomain"]
+
+        for scheme in ("http", "https"):
+            result = item.get(scheme, {})
+
+            if not result.get("reachable"):
+                continue
+
+            missing = result.get("missing_headers", [])
+
+            if missing:
+                any_findings = True
+                print(f"    - {subdomain} [{scheme.upper()}]")
+                for header in missing:
+                    print(f"        Missing: {header}")
+
+    if not any_findings:
+        print("    No missing security headers detected on reachable assets.")
+
+
 def main() -> None:
     args = parse_args()
     ensure_directory(args.output_dir)
@@ -171,12 +198,15 @@ def main() -> None:
     # Phase 3: Web fingerprinting
     web_results = WebCollector(resolved_hosts).collect()
 
+    # Phase 7: Security header analysis
+    header_results = analyze_web_headers(web_results)
+
     # Phase 4: Storage + diff
     merged_assets = merge_asset_data(dns_results, web_results)
 
     db = DatabaseManager()
     try:
-        scan_id = db.insert_scan(args.domain, "phase6_enumeration", timestamp)
+        scan_id = db.insert_scan(args.domain, "phase7_security_header_analysis", timestamp)
 
         for asset in merged_assets:
             db.insert_asset(scan_id, asset)
@@ -195,11 +225,11 @@ def main() -> None:
         # Phase 5: Risk scoring
         findings = score_all_assets(current_assets, diff_results["new_hosts"])
 
-        output_file = f"{args.output_dir}/phase6_scan_{args.domain}_{timestamp}.json"
+        output_file = f"{args.output_dir}/phase7_scan_{args.domain}_{timestamp}.json"
 
         report = {
             "target_domain": args.domain,
-            "scan_type": "phase6_passive_enumeration",
+            "scan_type": "phase7_security_header_analysis",
             "timestamp_utc": timestamp,
             "scan_id": scan_id,
             "previous_scan_id": previous_scan_id,
@@ -214,6 +244,7 @@ def main() -> None:
             },
             "diff_results": diff_results,
             "risk_findings": findings,
+            "header_analysis": header_results,
             "dns_results": dns_results,
             "web_results": web_results,
         }
@@ -239,6 +270,8 @@ def main() -> None:
             web_results=web_results,
             diff_results=diff_results,
         )
+
+        print_header_analysis(header_results)
 
         print_executive_report(findings)
 
