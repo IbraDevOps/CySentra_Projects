@@ -16,15 +16,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="CySentra ASM - External Attack Surface Monitoring"
     )
-    parser.add_argument(
-        "domain",
-        help="Target domain (e.g. example.com)",
-    )
-    parser.add_argument(
-        "--output-dir",
-        default="reports",
-        help="Directory where JSON reports will be saved",
-    )
+    parser.add_argument("domain", help="Target domain, e.g. example.com")
+    parser.add_argument("--output-dir", default="reports")
     return parser.parse_args()
 
 
@@ -32,12 +25,8 @@ def merge_asset_data(
     dns_results: List[Dict[str, Any]],
     web_results: List[Dict[str, Any]],
 ) -> List[Dict[str, Any]]:
-    """
-    Merge DNS validation results with web fingerprinting results into
-    a single asset-centric structure.
-    """
     web_index = {item["subdomain"]: item for item in web_results}
-    merged: List[Dict[str, Any]] = []
+    merged = []
 
     for dns_item in dns_results:
         host = dns_item["subdomain"]
@@ -65,20 +54,21 @@ def merge_asset_data(
 
 
 def build_initial_diff(current_assets: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """
-    For a first baseline scan, only resolved assets are counted as new hosts.
-    """
-    new_hosts = [
-        asset["subdomain"]
-        for asset in current_assets
-        if asset.get("resolves")
-    ]
-
     return {
-        "new_hosts": new_hosts,
+        "new_hosts": [
+            asset["subdomain"]
+            for asset in current_assets
+            if asset.get("resolves")
+        ],
         "removed_hosts": [],
         "changed_hosts": [],
     }
+
+
+def print_source_stats(source_stats: Dict[str, int]) -> None:
+    print("\n[+] Subdomain Source Stats:")
+    for source, count in source_stats.items():
+        print(f"    - {source}: {count}")
 
 
 def print_monitoring_summary(
@@ -91,9 +81,6 @@ def print_monitoring_summary(
     diff_results: Dict[str, Any],
     output_file: str,
 ) -> None:
-    """
-    Print monitoring-oriented summary information.
-    """
     print(f"[+] Target: {domain}")
     print(f"[+] Scan ID: {scan_id}")
     print(f"[+] Previous Scan ID: {previous_scan_id}")
@@ -112,9 +99,6 @@ def print_recon_summary(
     web_results: List[Dict[str, Any]],
     diff_results: Dict[str, Any],
 ) -> None:
-    """
-    Print recon-style details to the terminal.
-    """
     if subdomains:
         print("\n[+] Candidate Subdomains:")
         for subdomain in subdomains:
@@ -135,7 +119,6 @@ def print_recon_summary(
 
             for scheme in ("http", "https"):
                 result = item.get(scheme, {})
-
                 if result.get("reachable"):
                     print(
                         f"        [{scheme.upper()}] {result.get('status_code')} "
@@ -175,23 +158,25 @@ def main() -> None:
 
     timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
 
-    # Phase 1: candidate subdomain generation
-    subdomains = SubdomainCollector(args.domain).collect()
+    # Phase 6: enhanced subdomain discovery with source statistics
+    subdomain_collector = SubdomainCollector(args.domain)
+    subdomain_result = subdomain_collector.collect_with_sources()
+    subdomains = subdomain_result["subdomains"]
+    source_stats = subdomain_result["source_stats"]
 
-    # Phase 2: DNS resolution / validation
+    # Phase 2: DNS validation
     dns_results = DNSCollector(subdomains).collect()
     resolved_hosts = [item["subdomain"] for item in dns_results if item["resolves"]]
 
-    # Phase 3: HTTP/HTTPS fingerprinting
+    # Phase 3: Web fingerprinting
     web_results = WebCollector(resolved_hosts).collect()
 
-    # Merge DNS + web into one asset view
+    # Phase 4: Storage + diff
     merged_assets = merge_asset_data(dns_results, web_results)
 
     db = DatabaseManager()
     try:
-        # Phase 4: store current scan
-        scan_id = db.insert_scan(args.domain, "storage_and_diff", timestamp)
+        scan_id = db.insert_scan(args.domain, "phase6_enumeration", timestamp)
 
         for asset in merged_assets:
             db.insert_asset(scan_id, asset)
@@ -207,17 +192,18 @@ def main() -> None:
         else:
             diff_results = build_initial_diff(current_assets)
 
-        # Phase 5: risk scoring
+        # Phase 5: Risk scoring
         findings = score_all_assets(current_assets, diff_results["new_hosts"])
 
-        output_file = f"{args.output_dir}/phase5_scan_{args.domain}_{timestamp}.json"
+        output_file = f"{args.output_dir}/phase6_scan_{args.domain}_{timestamp}.json"
 
         report = {
             "target_domain": args.domain,
-            "scan_type": "risk_scored_monitoring",
+            "scan_type": "phase6_passive_enumeration",
             "timestamp_utc": timestamp,
             "scan_id": scan_id,
             "previous_scan_id": previous_scan_id,
+            "subdomain_source_stats": source_stats,
             "generated_candidates": len(subdomains),
             "resolved_assets": len(resolved_hosts),
             "fingerprinted_assets": len(web_results),
@@ -244,6 +230,8 @@ def main() -> None:
             diff_results=diff_results,
             output_file=output_file,
         )
+
+        print_source_stats(source_stats)
 
         print_recon_summary(
             subdomains=subdomains,
