@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 from typing import Any, Dict, List
 
 from collectors.dns import DNSCollector
+from collectors.ssl_check import SSLCollector
 from collectors.subdomains import SubdomainCollector
 from collectors.web import WebCollector
 from core.db import DatabaseManager
@@ -179,6 +180,34 @@ def print_header_analysis(header_results: List[Dict[str, Any]]) -> None:
         print("    No missing security headers detected on reachable assets.")
 
 
+def print_ssl_summary(ssl_results: List[Dict[str, Any]]) -> None:
+    print("\n[+] SSL/TLS Certificate Analysis")
+
+    for item in ssl_results:
+        host = item["subdomain"]
+
+        if not item.get("ssl_reachable"):
+            print(f"    - {host}: SSL unreachable")
+            continue
+
+        print(f"    - {host}")
+        print(f"        Issuer: {item.get('issuer')}")
+        print(f"        Subject: {item.get('subject')}")
+        print(f"        Valid From: {item.get('not_before')}")
+        print(f"        Valid Until: {item.get('not_after')}")
+        print(f"        Days Until Expiry: {item.get('days_until_expiry')}")
+
+        if item.get("expired"):
+            print("        Warning: certificate is expired")
+
+        if item.get("expires_soon"):
+            print("        Warning: certificate expires soon")
+
+        san = item.get("san") or []
+        if san:
+            print(f"        SANs: {', '.join(san[:5])}")
+
+
 def main() -> None:
     args = parse_args()
     ensure_directory(args.output_dir)
@@ -201,12 +230,15 @@ def main() -> None:
     # Phase 7: Security header analysis
     header_results = analyze_web_headers(web_results)
 
+    # Phase 8: SSL/TLS certificate intelligence
+    ssl_results = SSLCollector(resolved_hosts).collect()
+
     # Phase 4: Storage + diff
     merged_assets = merge_asset_data(dns_results, web_results)
 
     db = DatabaseManager()
     try:
-        scan_id = db.insert_scan(args.domain, "phase7_security_header_analysis", timestamp)
+        scan_id = db.insert_scan(args.domain, "phase8_tls_intelligence", timestamp)
 
         for asset in merged_assets:
             db.insert_asset(scan_id, asset)
@@ -225,11 +257,11 @@ def main() -> None:
         # Phase 5: Risk scoring
         findings = score_all_assets(current_assets, diff_results["new_hosts"])
 
-        output_file = f"{args.output_dir}/phase7_scan_{args.domain}_{timestamp}.json"
+        output_file = f"{args.output_dir}/phase8_scan_{args.domain}_{timestamp}.json"
 
         report = {
             "target_domain": args.domain,
-            "scan_type": "phase7_security_header_analysis",
+            "scan_type": "phase8_tls_intelligence",
             "timestamp_utc": timestamp,
             "scan_id": scan_id,
             "previous_scan_id": previous_scan_id,
@@ -245,6 +277,7 @@ def main() -> None:
             "diff_results": diff_results,
             "risk_findings": findings,
             "header_analysis": header_results,
+            "ssl_results": ssl_results,
             "dns_results": dns_results,
             "web_results": web_results,
         }
@@ -272,7 +305,7 @@ def main() -> None:
         )
 
         print_header_analysis(header_results)
-
+        print_ssl_summary(ssl_results)
         print_executive_report(findings)
 
     finally:
