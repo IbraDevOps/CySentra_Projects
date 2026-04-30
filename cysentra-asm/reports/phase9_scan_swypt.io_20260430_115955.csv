@@ -1,0 +1,46 @@
+Severity,Subdomain,Score,Reasons
+MEDIUM,merchant.swypt.io,45,Newly discovered host; Admin/dashboard page detected
+MEDIUM,staging.merchant.swypt.io,45,Newly discovered host; Admin/dashboard page detected
+MEDIUM,www.merchant.swypt.io,45,Newly discovered host; Admin/dashboard page detected
+MEDIUM,www.staging.merchant.swypt.io,45,Newly discovered host; Admin/dashboard page detected
+MEDIUM,withdraw.swypt.io,40,Newly discovered host; HTTP reachable without HTTPS
+MEDIUM,www.admin.swypt.io,40,Newly discovered host; HTTP reachable without HTTPS
+LOW,admin.swypt.io,20,HTTP reachable without HTTPS
+LOW,admindashboard.swypt.io,20,Newly discovered host
+LOW,api.swypt.io,20,HTTP reachable without HTTPS
+LOW,auth.swypt.io,20,HTTP reachable without HTTPS
+LOW,blog.swypt.io,20,HTTP reachable without HTTPS
+LOW,checkout.staging.swypt.io,20,Newly discovered host
+LOW,checkout.swypt.io,20,Newly discovered host
+LOW,dev.swypt.io,20,HTTP reachable without HTTPS
+LOW,explora.swypt.io,20,Newly discovered host
+LOW,gtm.swypt.io,20,Newly discovered host
+LOW,jenga.swypt.io,20,Newly discovered host
+LOW,m.swypt.io,20,HTTP reachable without HTTPS
+LOW,mail.swypt.io,20,HTTP reachable without HTTPS
+LOW,pool.swypt.io,20,Newly discovered host
+LOW,portal.swypt.io,20,HTTP reachable without HTTPS
+LOW,secure.swypt.io,20,HTTP reachable without HTTPS
+LOW,staging.baas.swypt.io,20,Newly discovered host
+LOW,staging.dashboard.swypt.io,20,Newly discovered host
+LOW,staging.enterprise.swypt.io,20,Newly discovered host
+LOW,staging.pool.swypt.io,20,Newly discovered host
+LOW,test.swypt.io,20,HTTP reachable without HTTPS
+LOW,vpn.swypt.io,20,HTTP reachable without HTTPS
+LOW,www.admindashboard.swypt.io,20,Newly discovered host
+LOW,www.app.swypt.io,20,Newly discovered host
+LOW,www.checkout.swypt.io,20,Newly discovered host
+LOW,www.dashboard.swypt.io,20,Newly discovered host
+LOW,www.explora.swypt.io,20,Newly discovered host
+LOW,www.gtm.swypt.io,20,Newly discovered host
+LOW,www.jenga.swypt.io,20,Newly discovered host
+LOW,www.pool.swypt.io,20,Newly discovered host
+LOW,www.staging.baas.swypt.io,20,Newly discovered host
+LOW,www.staging.dashboard.swypt.io,20,Newly discovered host
+LOW,www.staging.enterprise.swypt.io,20,Newly discovered host
+LOW,www.staging.pool.swypt.io,20,Newly discovered host
+LOW,www.staging.swypt.io,20,Newly discovered host
+LOW,www.swypt.io,20,HTTP reachable without HTTPS
+INFO,app.swypt.io,0,
+INFO,dashboard.swypt.io,0,
+INFO,staging.swypt.io,0,
