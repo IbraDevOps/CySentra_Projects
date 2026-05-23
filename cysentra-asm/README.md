@@ -56,6 +56,26 @@ The first release focuses on five core capabilities:
 4. SSL certificate inspection
 5. Change tracking between scans
 
+
+
+
+
+## Project Status
+
+CySentra ASM v1.0 is complete.
+
+Current capabilities:
+- Passive subdomain discovery
+- DNS validation
+- HTTP/HTTPS fingerprinting
+- Security header analysis
+- TLS certificate intelligence
+- SQLite scan history
+- Change detection
+- Risk scoring
+- JSON/CSV/HTML reporting
+
+
 ## Example Findings
 
 * New subdomain discovered
