@@ -8,6 +8,7 @@ from collectors.subdomains import SubdomainCollector
 from collectors.web import WebCollector
 from core.db import DatabaseManager
 from core.diff import diff_assets
+from core.exporters import export_csv_findings, export_html_report
 from core.header_analysis import analyze_web_headers
 from core.reporting import print_executive_report
 from core.scoring import score_all_assets
@@ -82,6 +83,8 @@ def print_monitoring_summary(
     web_results: List[Dict[str, Any]],
     diff_results: Dict[str, Any],
     output_file: str,
+    csv_file: str,
+    html_file: str,
 ) -> None:
     print(f"[+] Target: {domain}")
     print(f"[+] Scan ID: {scan_id}")
@@ -92,7 +95,9 @@ def print_monitoring_summary(
     print(f"[+] New Hosts: {len(diff_results['new_hosts'])}")
     print(f"[+] Removed Hosts: {len(diff_results['removed_hosts'])}")
     print(f"[+] Changed Hosts: {len(diff_results['changed_hosts'])}")
-    print(f"[+] Report: {output_file}")
+    print(f"[+] JSON Report: {output_file}")
+    print(f"[+] CSV Report: {csv_file}")
+    print(f"[+] HTML Report: {html_file}")
 
 
 def print_recon_summary(
@@ -238,7 +243,7 @@ def main() -> None:
 
     db = DatabaseManager()
     try:
-        scan_id = db.insert_scan(args.domain, "phase8_tls_intelligence", timestamp)
+        scan_id = db.insert_scan(args.domain, "phase9_reporting_exports", timestamp)
 
         for asset in merged_assets:
             db.insert_asset(scan_id, asset)
@@ -257,11 +262,11 @@ def main() -> None:
         # Phase 5: Risk scoring
         findings = score_all_assets(current_assets, diff_results["new_hosts"])
 
-        output_file = f"{args.output_dir}/phase8_scan_{args.domain}_{timestamp}.json"
+        output_file = f"{args.output_dir}/phase9_scan_{args.domain}_{timestamp}.json"
 
         report = {
             "target_domain": args.domain,
-            "scan_type": "phase8_tls_intelligence",
+            "scan_type": "phase9_reporting_exports",
             "timestamp_utc": timestamp,
             "scan_id": scan_id,
             "previous_scan_id": previous_scan_id,
@@ -284,6 +289,14 @@ def main() -> None:
 
         save_json(report, output_file)
 
+        csv_file = export_csv_findings(findings, output_file)
+        html_file = export_html_report(
+            args.domain,
+            findings,
+            output_file,
+            len(resolved_hosts),
+        )
+
         print_monitoring_summary(
             domain=args.domain,
             scan_id=scan_id,
@@ -293,6 +306,8 @@ def main() -> None:
             web_results=web_results,
             diff_results=diff_results,
             output_file=output_file,
+            csv_file=csv_file,
+            html_file=html_file,
         )
 
         print_source_stats(source_stats)

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.95 scan initiated Sat May 16 10:58:39 2026 as: /usr/lib/nmap/nmap -sV -sC -Pn -p 22,80,443,3005,3017 -oA swypt_focused_services 173.212.198.89 -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -sV -sC -Pn -p 22,80,443,3005,3017 -oA swypt_focused_services 173.212.198.89" start="1778918319" startstr="Sat May 16 10:58:39 2026" version="7.95" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="5" services="22,80,443,3005,3017"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<target specification="173.212.198.89" status="skipped" reason="invalid"/>
+<runstats><finished time="1778918319" timestr="Sat May 16 10:58:39 2026" summary="Nmap done at Sat May 16 10:58:39 2026; 0 IP addresses (0 hosts up) scanned in 0.13 seconds" elapsed="0.13" exit="success"/><hosts up="0" down="0" total="0"/>
+</runstats>
+</nmaprun>
